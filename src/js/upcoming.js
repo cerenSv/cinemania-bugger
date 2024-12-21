@@ -23,7 +23,7 @@ Promise.all([
   .then((data) => {
     console.log(data);
     const upcoming = data[0].results[0];
-    const genres = data[1].results;
+    const genres = data[1].genres; // genres array'ini al
     console.log(data[1]);
 
     if (upcoming && upcoming.id) {
@@ -58,22 +58,24 @@ Promise.all([
       const popularityResult = document.getElementById(`popularity`);
       popularityResult.textContent = popularity;
 
-      // yeter artık genre yazmayalım şuna niye yazıyoruz genre yazmasak ölür müyüz imdat ya
-      const genreID = upcoming.genre_ids;
+      // Genre işleme
+      const genresObj = genres.reduce((object, item) => {
+        object[item.id] = item.name;
+        return object;
+      }, {});
+
       const genreName = [];
-      if (genres) {
-        for (let i = 0; i < genreID.length; i++) {
-          const genre = genres.find((e) => e.id === genreID[i]);
-          if (genre) {
-            genreName.push(genre.name);
-          } else {
-            genreName.push("Not happening bruh");
-          }
-        }
+      if (upcoming.genre_ids) {
+        upcoming.genre_ids.forEach((id) => {
+          const genre = genresObj[id]; // Objede id'ye karşılık gelen name
+          genreName.push(genre || "Not happening bruh");
+        });
       }
 
-      const printGenre = document.querySelectorAll(`.genre`);
-      printGenre.textContent = genreName.join(", ");
+      const printGenre = document.querySelector(`#genre`);
+      printGenre.textContent = genreName.join(", "); // Virgülle ayırarak yazdırma
+
+      console.log(`genresObj`, genresObj);
     } else {
       console.log("obviously not coming");
     }
