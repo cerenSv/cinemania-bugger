@@ -58,7 +58,7 @@ Promise.all([
       const popularityResult = document.getElementById(`popularity`);
       popularityResult.textContent = popularity;
 
-      // Genre işleme
+      // yeter artık genre yazmayalım şuna niye yazıyoruz genre yazmasak ölür müyüz imdat ya
       const genresObj = genres.reduce((object, item) => {
         object[item.id] = item.name;
         return object;
@@ -67,13 +67,13 @@ Promise.all([
       const genreName = [];
       if (upcoming.genre_ids) {
         upcoming.genre_ids.forEach((id) => {
-          const genre = genresObj[id]; // Objede id'ye karşılık gelen name
+          const genre = genresObj[id];
           genreName.push(genre || "Not happening bruh");
         });
       }
 
       const printGenre = document.querySelector(`#genre`);
-      printGenre.textContent = genreName.join(", "); // Virgülle ayırarak yazdırma
+      printGenre.textContent = genreName.join(", ");
 
       console.log(`genresObj`, genresObj);
     } else {
