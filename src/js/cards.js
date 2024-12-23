@@ -1,17 +1,17 @@
 /* Film Kartları -  Weekly */
 
 const apiKey =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNGY1NjJmMmY0ZGMyNzEwNzllZmM2NTJkZTZmYmY2OSIsIm5iZiI6MTczNDIxNzAyMS4zNjMwMDAyLCJzdWIiOiI2NzVlMGQzZDU1MWY2OWY3N2NhZGNhZTAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4iQa3mHbeX0ibxj0ulYA5zIh01W_4z1bB4a-cCP-Y6A';
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNGY1NjJmMmY0ZGMyNzEwNzllZmM2NTJkZTZmYmY2OSIsIm5iZiI6MTczNDIxNzAyMS4zNjMwMDAyLCJzdWIiOiI2NzVlMGQzZDU1MWY2OWY3N2NhZGNhZTAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4iQa3mHbeX0ibxj0ulYA5zIh01W_4z1bB4a-cCP-Y6A";
 
-fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', {
-  method: 'GET',
+fetch("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1", {
+  method: "GET",
   headers: {
     Authorization: `Bearer ${apiKey}`,
-    Accept: 'application/json',
+    Accept: "application/json",
   },
 })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => response.json())
+  .then((data) => {
     // 3 kartım olduğu için 3 filmi böyle aldım
     for (let i = 0; i < 3; i++) {
       const movie = data.results[i]; // ben burayı data[0] diye başlatmaya kalkıp yarım saat uğraştım, siz yanmayın...
@@ -36,20 +36,20 @@ fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', {
 */
 
       // yıl
-      const movieYear = movie.release_date.split('-')[0];
+      const movieYear = movie.release_date.split("-")[0];
 
       // kartları gez
-      const movieCards = document.querySelectorAll('.movie-card');
+      const movieCards = document.querySelectorAll(".movie-card");
       const movieCard = movieCards[i];
 
       // çağır
-      movieCard.querySelector('.movie-image').src = imageUrl; // resim
-      movieCard.querySelector('.movie-title').innerText = movieTitle; // başlık
+      movieCard.querySelector(".movie-image").src = imageUrl; // resim
+      movieCard.querySelector(".movie-title").innerText = movieTitle; // başlık
       // movieCard.querySelector('.genre').innerText = genres; lanet olası genre
-      movieCard.querySelector('.year').innerText = movieYear; // yıl baya basit oldu tşk
+      movieCard.querySelector(".year").innerText = movieYear; // yıl baya basit oldu tşk
     }
   })
-  .catch(error => console.error(error));
+  .catch((error) => console.error(error));
 
 /**
  

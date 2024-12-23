@@ -59,23 +59,23 @@ Promise.all([
       popularityResult.textContent = popularity;
 
       // yeter artık genre yazmayalım şuna niye yazıyoruz genre yazmasak ölür müyüz imdat ya
-      const genresObj = genres.reduce((object, item) => {
-        object[item.id] = item.name;
-        return object;
-      }, {});
+      const upcomingGenre = upcoming.genre_ids; // upcoming verisi
+      const genreList = genres; // genres verisi
 
-      const genreName = [];
-      if (upcoming.genre_ids) {
-        upcoming.genre_ids.forEach((id) => {
-          const genre = genresObj[id];
-          genreName.push(genre || "Not happening bruh");
+      let genreNames = []; // Sonuçları depolayacağımız boş dizi
+
+      // upcomingGenre içindeki her id için döngü
+      upcomingGenre.forEach((id) => {
+        // genres içindeki her bir nesneyle karşılaştırma
+        genreList.forEach((genre) => {
+          if (genre.id === id) {
+            genreNames.push(genre.name); // eşleşen genre.name'i diziye ekle
+          }
         });
-      }
+      });
 
-      const printGenre = document.querySelector(`#genre`);
-      printGenre.textContent = genreName.join(", ");
-
-      console.log(`genresObj`, genresObj);
+      const genreResult = document.querySelector(`.genre`);
+      genreResult.textContent = genreNames.join(", "); // dizi elemanlarını virgülle birleştir
     } else {
       console.log("obviously not coming");
     }
