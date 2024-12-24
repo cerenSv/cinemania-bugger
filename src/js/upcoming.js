@@ -58,6 +58,11 @@ Promise.all([
       const popularityResult = document.getElementById(`popularity`);
       popularityResult.textContent = popularity;
 
+      // Overview - About - Açıklama
+      const overview = upcoming.overview;
+      const overviewResult = document.querySelector(`#upcımingOverview`);
+      overviewResult.textContent = overview;
+
       // yeter artık genre yazmayalım şuna niye yazıyoruz genre yazmasak ölür müyüz imdat ya
       const upcomingGenre = upcoming.genre_ids; // upcoming verisi
       const genreList = genres; // genres verisi
@@ -74,7 +79,7 @@ Promise.all([
         });
       });
 
-      const genreResult = document.querySelector(`.genre`);
+      const genreResult = document.querySelector(`.genre`); // Normalde buray querySelectorAll yapmak lazım ama niyeyse tüm veriler kayboluyor
       genreResult.textContent = genreNames.join(", "); // dizi elemanlarını virgülle birleştir
     } else {
       console.log("obviously not coming");
